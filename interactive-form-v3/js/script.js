@@ -19,5 +19,22 @@ titleSelect.addEventListener('change', (e) => {
     }
 })
 
+//This constant variable gets the shirt color
+const shirtColor = document.getElementById('color');
+
+//This variable gets the shirt design and disables the color
+const designSelect = document.getElementById('design');
+shirtColor.disabled = true;
+
+//This handler enabled the shirt color when the select field is clicked
+designSelect.addEventListener('click', (e) => {
+    shirtColor.disabled = false;
+    if(e.target.value === 'Theme - JS Puns'){
+        shirtColor.options[1].disabled;
+
+    }
+
+})
+
 // I was last watching the youtube video in the open tab about showing 
 // and hiding selections and input fields based on clicks

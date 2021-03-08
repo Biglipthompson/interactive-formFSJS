@@ -36,14 +36,16 @@ designSelect.addEventListener('change', (e) => {
     colorTheme[0].textContent = 'Choose a color?';
     color.value = 'Choose a color?';
 
-        for (i = 0; i < colorTheme.length; i++ ){
-            if ( themeSelect === dataAttribute ){
-                color.Theme[i].hidden = false;
+    for (i = 0; i < colorTheme.children; i++ ){
+        //if the event target equals the data theme
+    if ( themeSelect === dataAttribute ){
+            dataAttribute = document.getElementById('color').getAttribute('data-theme');
+            color.Theme[i].hidden = true;
             } else if( themeSelect !== dataAttribute ){
-                colorTheme[i].hidden = true;
-            }
+            colorTheme[i].hidden = false;
         }
-    })
+    }
+})
 
 // I was last watching the youtube video in the open tab about showing 
 // and hiding selections and input fields based on clicks

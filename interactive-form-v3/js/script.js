@@ -41,10 +41,10 @@ designSelect.addEventListener('change', (e) => {
     if ( themeSelect === dataAttribute ){
             // dataAttribute = dataAttribute = document.querySelectorAll('[data-theme]');
             color.Theme[i].hidden = false;
-            color.Theme[i].selected = true;
+            dataAttribute[i].selected = true;
             } else if( themeSelect !== dataAttribute ){
             colorTheme[i].hidden = true;
-            colorTheme[i].selected = false;
+            dataAttribute[i].selected = false;
 
         }
     }

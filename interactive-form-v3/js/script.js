@@ -31,7 +31,7 @@ titleSelect.addEventListener('change', (e) => {
 //This handler enabled the shirt color when the select field is clicked
 designSelect.addEventListener('change', (e) => {
     shirtColor.disabled = false;
-    let dataAttribute = document.getElementById('color').getAttribute('data-theme');
+    let dataAttribute = document.querySelectorAll('[data-theme]');
     let themeSelect = e.target.value;
     colorTheme[0].textContent = 'Choose a color?';
     color.value = 'Choose a color?';
@@ -39,10 +39,13 @@ designSelect.addEventListener('change', (e) => {
     for (i = 0; i < colorTheme.children; i++ ){
         //if the event target equals the data theme
     if ( themeSelect === dataAttribute ){
-            dataAttribute = document.getElementById('color').getAttribute('data-theme');
-            color.Theme[i].hidden = true;
+            // dataAttribute = dataAttribute = document.querySelectorAll('[data-theme]');
+            color.Theme[i].hidden = false;
+            color.Theme[i].selected = true;
             } else if( themeSelect !== dataAttribute ){
-            colorTheme[i].hidden = false;
+            colorTheme[i].hidden = true;
+            colorTheme[i].selected = false;
+
         }
     }
 })

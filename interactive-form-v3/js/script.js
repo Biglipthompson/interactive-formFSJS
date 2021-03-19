@@ -16,7 +16,9 @@ const otherField = document.getElementById('other-job-role');
 const titleSelect = document.getElementById('title');
 otherField.hidden = true;
 
-
+const activities = document.querySelectorAll('activities');
+const cost = document.querySelectorAll('activities-cost');
+let totalCost = 0;
 
 //This handler is going to be a click handler for the select element
 titleSelect.addEventListener('change', (e) => {
@@ -26,7 +28,6 @@ titleSelect.addEventListener('change', (e) => {
     otherField.style.display = 'none';
     }
 })
-
 
 designSelect.addEventListener('change', (e) => {
     const jsPuns = document.querySelectorAll('[data-theme="js puns"]');
@@ -39,17 +40,24 @@ designSelect.addEventListener('change', (e) => {
     for (let i = 0; i < jsPuns.length; i++) {
         colorTheme[0].textContent = 'Choose a JS color?';
         colorSelect.style.display = "block";
-        jsPuns[i].style.display = "block";
-        heartJS[i].style.display = "none";
+        jsPuns[i].hidden = false;
+        heartJS[i].selected = false;
+        heartJS[i].hidden = true;
     }
     } else if (e.target.value === "heart js") {
     for (let i = 0; i < heartJS.length; i++) {
         colorTheme[0].textContent = 'Choose a Heart color?';
         colorSelect.style.display = "block";
-        heartJS[i].style.display = "block";
-        jsPuns[i].style.display = "none";
+        heartJS[i].hidden = false;
+        jsPuns[i].hidden = true;
+        jsPuns[i].selected = false;
+        }
     }
-    }
+});
+
+activities.addEventListener('change', () => {
+    const activityCost =  document.querySelectorAll('[data-cost]')[i];
+    
 });
 
 
@@ -57,53 +65,6 @@ designSelect.addEventListener('change', (e) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-//     colorSelect.disabled = false;
-//     colorTheme[0].textContent = 'Choose a color?';
-//     color.value = 'Choose a color?';
-//     const jsPuns = document.querySelectorAll('[value="js puns"]');
-//     const heartJs = document.querySelectorAll('[value="heart js"]')
-//     const jsPunsColor = document.querySelectorAll('[data-theme="js puns"]');
-//     const heartJsColor = document.querySelectorAll('[data-theme="heart js"]')
-
-//     if(e.target.value === jsPuns){
-//         for (let i = 0; i < jsPunsColor.length; i++ ){
-//                 jsPunsColor[i].style.display = 'block';
-//                 heartJsColor[i].style.display = 'none';
-//                 colorSelect.style.display = 'none';
-//         }
-//     }
-    
-//     if(e.target.value === heartJs){
-//         for (let i = 0; i < heartJsColor.length; i++ ){
-//                 heartJsColor[i].style.display = 'block';
-//                 jsPunsColor[i].style.display = 'none';
-//                 colorSelect.style.display = 'none';
-//         }
-//     }
-// });
-
-
-    // const themeSelect = e.target.value;
-    // const dataAttribute = getAttribute('data-theme').colorTheme[i];
-    // if ( themeSelect === dataAttribute ){
-    //     color.Theme[i].hidden = false;
-    //     color.Theme[i].selected = true;
-    //     } else if ( themeSelect !== dataAttribute) {
-    //     colorTheme[i].hidden = true;
-    //     colorTheme[i].selected = false;
-    //     }
 
 
 

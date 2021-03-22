@@ -58,19 +58,27 @@ const registerForAct = document.querySelector('#activities');
 const itemCost = document.querySelector('#activities-cost');
 //This will be the total cost variable
 let totalCost = 0;
-
-
+//Event listener that checks and adds prices to the total price.
 registerForAct.addEventListener('change', (e) => {
     const activityCost =  parseInt(e.target.getAttribute('data-cost'));
     if (e.target.checked){
         totalCost += activityCost;
     }
-
     else {
         totalCost -= activityCost;
     }
     itemCost.innerHTML = `Total: ${totalCost}`;
 });
+
+const payment =  document.querySelector('#payment');
+const creditCard = document.querySelector('#credit-card');
+const payPal = document.querySelector('#paypal');
+const bitcoin = document.querySelector('#bitcoin');
+
+bitcoin.hidden = true;
+payPal.hidden = true;
+
+
 
 
 

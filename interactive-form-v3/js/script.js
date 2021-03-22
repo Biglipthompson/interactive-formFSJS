@@ -55,20 +55,21 @@ designSelect.addEventListener('change', (e) => {
 //Fieldset variable
 const registerForAct = document.querySelector('#activities');
 //Item cost variable
-const itemCost = document.querySelectorAll('activities-cost');
+const itemCost = document.querySelector('#activities-cost');
 //This will be the total cost variable
 let totalCost = 0;
 
 
 registerForAct.addEventListener('change', (e) => {
     const activityCost =  parseInt(e.target.getAttribute('data-cost'));
-    if (e.target == checked){
-    activityCost += totalCost;
+    if (e.target.checked){
+        totalCost += activityCost;
     }
-    else if ( e.target !== checked ) {
-    activityCost -= totalCost;
+
+    else {
+        totalCost -= activityCost;
     }
-    itemCost.innerHTML = `Total: $${totalCost}`;
+    itemCost.innerHTML = `Total: ${totalCost}`;
 });
 
 

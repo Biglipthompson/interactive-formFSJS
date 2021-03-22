@@ -16,9 +16,6 @@ const otherField = document.getElementById('other-job-role');
 const titleSelect = document.getElementById('title');
 otherField.hidden = true;
 
-const activities = document.querySelectorAll('activities');
-const cost = document.querySelectorAll('activities-cost');
-let totalCost = 0;
 
 //This handler is going to be a click handler for the select element
 titleSelect.addEventListener('change', (e) => {
@@ -55,9 +52,23 @@ designSelect.addEventListener('change', (e) => {
     }
 });
 
-activities.addEventListener('change', () => {
-    const activityCost =  document.querySelectorAll('[data-cost]')[i];
-    
+//Fieldset variable
+const registerForAct = document.querySelector('#activities');
+//Item cost variable
+const itemCost = document.querySelectorAll('activities-cost');
+//This will be the total cost variable
+let totalCost = 0;
+
+
+registerForAct.addEventListener('change', (e) => {
+    const activityCost =  parseInt(e.target.getAttribute('data-cost'));
+    if (e.target == checked){
+    activityCost += totalCost;
+    }
+    else if ( e.target !== checked ) {
+    activityCost -= totalCost;
+    }
+    itemCost.innerHTML = `Total: $${totalCost}`;
 });
 
 

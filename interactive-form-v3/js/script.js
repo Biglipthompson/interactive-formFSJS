@@ -74,12 +74,34 @@ const payment =  document.querySelector('#payment');
 const creditCard = document.querySelector('#credit-card');
 const payPal = document.querySelector('#paypal');
 const bitcoin = document.querySelector('#bitcoin');
+// let paymentSelected = payment.children[2].selected;
 
 bitcoin.hidden = true;
 payPal.hidden = true;
 
-// payment.children[1].selected
-payment.setAttribute('hidden', 'selected').children[2];
+// payment.children[1].selected = true;
+// payment.setAttribute('selected', 'selected').children[1];
+//paymentSelected.setAttribute('selected', '');
+ payment.addEventListener('change', (e) => {
+    bitcoin.hidden = false;
+    payPal.hidden = false;
+    if (e.target == 'creditCard'){
+        creditCard.style.display = 'block';
+        payPal.style.display = 'none';
+        bitcoin.style.display = 'none';
+    }
+    else if (e.target == 'payPal' ) {
+        payPal.style.display = 'block';
+        creditCard.style.display = 'none';
+        bitcoin.style.display = 'none'; 
+    }
+    else if ( e.target == 'bitcoin'){
+        bitcoin.style.display = 'block';
+        payPal.style.display = 'none';
+        creditCard.style.display = 'none';
+    }
+});
+
 
 
 

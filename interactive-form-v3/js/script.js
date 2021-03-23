@@ -78,6 +78,9 @@ const bitcoin = document.querySelector('#bitcoin');
 bitcoin.hidden = true;
 payPal.hidden = true;
 
+// payment.children[1].selected
+payment.setAttribute('hidden', 'selected').children[2];
+
 
 
 

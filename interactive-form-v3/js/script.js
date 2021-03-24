@@ -1,7 +1,3 @@
-// This grabs the focus field and adds focus to it on load
-const nameField = document.getElementById("name");
-nameField.focus();
-
 //This constant variable gets the shirt color, the color select
 const colorSelect = document.querySelector("#color");
 const colorTheme = colorSelect.children;
@@ -16,6 +12,15 @@ const otherField = document.getElementById('other-job-role');
 const titleSelect = document.getElementById('title');
 otherField.hidden = true;
 
+//Form validation variables for the last section
+const emailAddress = document.querySelector('#email');
+const cardNumber = document.querySelector('cc-num');
+const zipCode = document.querySelector('zip');
+const cvv = document.querySelector('cvv');
+const formElement = document.forms[0];
+// This grabs the focus field and adds focus to it on load
+const nameField = document.getElementById("name");
+nameField.focus();
 
 //This handler is going to be a click handler for the select element
 titleSelect.addEventListener('change', (e) => {
@@ -101,6 +106,11 @@ payPal.hidden = true;
         creditCard.hidden = true;
     }
 });
+
+formElement.addEventListener('submit', () => {
+    let nameFieldValue = nameField.value;
+    let results = 
+})
 
 
 

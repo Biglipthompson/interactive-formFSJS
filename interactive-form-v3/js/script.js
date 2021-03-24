@@ -85,20 +85,20 @@ payPal.hidden = true;
  payment.addEventListener('change', (e) => {
     bitcoin.hidden = false;
     payPal.hidden = false;
-    if (e.target == 'creditCard'){
-        creditCard.style.display = 'block';
-        payPal.style.display = 'none';
-        bitcoin.style.display = 'none';
+    if (e.target.value == 'credit-card'){
+        creditCard.hidden = false;
+        payPal.hidden = true;
+        bitcoin.hidden = true;
     }
-    else if (e.target == 'payPal' ) {
-        payPal.style.display = 'block';
-        creditCard.style.display = 'none';
-        bitcoin.style.display = 'none'; 
+    else if (e.target.value == 'paypal') {
+        payPal.hidden = false;
+        creditCard.hidden = true;
+        bitcoin.hidden = true; 
     }
-    else if ( e.target == 'bitcoin'){
-        bitcoin.style.display = 'block';
-        payPal.style.display = 'none';
-        creditCard.style.display = 'none';
+    else if ( e.target.value == 'bitcoin'){
+        bitcoin.hidden = false;
+        payPal.hidden = true;
+        creditCard.hidden = true;
     }
 });
 

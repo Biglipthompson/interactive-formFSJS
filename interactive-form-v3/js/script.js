@@ -107,12 +107,26 @@ payPal.hidden = true;
     }
 });
 
-
-//Name field is the input field, the new variable is the input field value
-formElement.addEventListener('submit', () => {
+const nameValidator = () => {
     let nameFieldValue = nameField.value;
-    let results = 
+    let nameFieldTest = /^[a-zA-Z ]{1,20}$/.test(nameFieldValue);
+
+}
+
+const emailValidator = () => {
+
+}
+
+
+
+
+
+
+formElement('submit', () => {
+
+
 })
+
 
 
 

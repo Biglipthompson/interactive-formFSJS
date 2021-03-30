@@ -114,8 +114,8 @@ function nameValidator (nameField) {
 
 // nameField.addEventListener('input', createListener(nameValidator));
 
-const emailValidator = () => {
-
+const emailValidator = (emailAddress) => {
+ return /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailAddress);
 }
 
 formElement.addEventListener('submit', () => {

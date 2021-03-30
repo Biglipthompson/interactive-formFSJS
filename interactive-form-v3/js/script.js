@@ -18,7 +18,6 @@ const cardNumber = document.querySelector('cc-num');
 const zipCode = document.querySelector('zip');
 const cvv = document.querySelector('cvv');
 const formElement = document.forms[0];
-// This grabs the focus field and adds focus to it on load
 const nameField = document.getElementById("name");
 const nameFieldValue = nameField.value;
 nameField.focus();
@@ -108,11 +107,12 @@ payPal.hidden = true;
     }
 });
 
-function nameValidator (nameField) {
-    return /^[a-zA-Z ]+$/.test(nameField);
+function nameValidator () {
+
+    // return /^[a-zA-Z ]+$/.test(nameField);
+    // e.preventDefault();
 }
 
-// nameField.addEventListener('input', createListener(nameValidator));
 
 const emailValidator = (emailAddress) => {
  return /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailAddress);
@@ -120,8 +120,9 @@ const emailValidator = (emailAddress) => {
 
 formElement.addEventListener('submit', () => {
     nameValidator();
-    emailValidator();
+    // emailValidator();
     e.preventDefault();
+
 })
 
 

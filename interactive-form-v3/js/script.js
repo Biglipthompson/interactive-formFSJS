@@ -20,6 +20,7 @@ const cvv = document.querySelector('cvv');
 const formElement = document.forms[0];
 // This grabs the focus field and adds focus to it on load
 const nameField = document.getElementById("name");
+const nameFieldValue = nameField.value;
 nameField.focus();
 
 //This handler is going to be a click handler for the select element
@@ -107,24 +108,20 @@ payPal.hidden = true;
     }
 });
 
-const nameValidator = () => {
-    let nameFieldValue = nameField.value;
-    let nameFieldTest = /^[a-zA-Z ]{1,20}$/.test(nameFieldValue);
-
+function nameValidator (nameField) {
+    return /^[a-zA-Z ]+$/.test(nameField);
 }
+
+// nameField.addEventListener('input', createListener(nameValidator));
 
 const emailValidator = () => {
 
 }
 
-
-
-
-
-
-formElement('submit', () => {
-
-
+formElement.addEventListener('submit', () => {
+    nameValidator();
+    emailValidator();
+    e.preventDefault();
 })
 
 

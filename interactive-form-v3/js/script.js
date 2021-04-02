@@ -68,13 +68,21 @@ registerForAct.addEventListener('change', (e) => {
     itemCost.innerHTML = `Total: ${totalCost}`;
 });
 
+//Payment Options
 const payment =  document.querySelector('#payment');
 const creditCard = document.querySelector('#credit-card');
 const payPal = document.querySelector('#paypal');
 const bitcoin = document.querySelector('#bitcoin');
 bitcoin.hidden = true;
 payPal.hidden = true;
-
+//Form validation variables 
+const emailAddress = document.querySelector('#email');
+const cardNumber = document.querySelector('#cc-num');
+const zipCode = document.querySelector('#zip');
+const cvv = document.querySelector('#cvv');
+const formElement = document.querySelector('form');
+const nameField = document.getElementById("name");
+nameField.focus();
 
 //Payment option listeners and conditionals
  payment.addEventListener('change', (e) => {
@@ -97,15 +105,6 @@ payPal.hidden = true;
     }
 });
 
-//Form validation variables 
-const emailAddress = document.querySelector('#email');
-const cardNumber = document.querySelector('cc-num');
-const zipCode = document.querySelector('zip');
-const cvv = document.querySelector('cvv');
-const formElement = document.querySelector('form');
-const nameField = document.getElementById("name");
-nameField.focus();
-
 //Function validation for PASS
 function validationPass(element) {
     element.parentElement.className.add("valid");
@@ -123,54 +122,119 @@ function validationPass(element) {
   }
 
 //Name validator
-const nameValidator = () => {
+function nameValidator ()  {
     const nameFieldValue = nameField.value;
     console.log("Name value is :", `"${nameFieldValue}"`);
-
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameFieldValue);
-
     console.log("Name validation test on" `${nameFieldValue}` `${nameIsValid}`);
-
     if (nameIsValid) {
-        validationPass(nameFieldValue);
+        validationPass(nameField);
     } else {
-        validationFail(nameFieldValue);
+        validationFail(nameField);
     }
     return nameIsValid;
 }
 
 //Email Validator
-const emailValidator = () => {
+function emailValidator ()  {
     const emailValue = emailAddress.value;
-
-    console.log("email address value is :" `${emailValue}`);
-
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
-
     console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);
 
     if (emailIsValid){
-        validationPass(emailValue);
+        validationPass(emailAddress);
     } else {
-        validationFail(emailValue)
+        validationFail(emailAddress);
     }
     return emailIsValid;
 }
 
 //Activity validator
-const activitiyValidator = () => {
+function activitiyValidator () {
     let activityIsValid = activityCost > 0;
-    console.log("activity section is valid" `${activityIsValid}`)
+    if (activityIsValid) {
+        registerForAct.classList.add("valid");
+        registerForAct.classList.remove("not-valid");
+        registerForAct.lastElementChild.hidden = true;
+      } else {
+        registerForAct.classList.add("not-valid");
+        registerForAct.classList.remove("valid");
+        registerForAct.lastElementChild.hidden = false;
+      }
     return activityIsValid;
+}
+
+// Credit Card validator
+function creditCardValidator () {
+    if (!creditCard.hidden) {
+     const creditCardValue = creditCard.value;
+     const creditCardValid = /^\d{13,16}$/.test(creditCardValue);
+     if (creditCardValid) {
+            validationPass (cardNumber)
+        } else {
+            validationFail(cardNumber);
+        }
+        return cardNumber;
+    }
+}
+// Zip code function
+function zipValidator () {
+    if (!creditCard.hidden) {
+        const zipCodeValue = zipCode.value;
+        const zipCodeValid = /^\d{5}$/.test(zipCodeValue);
+        console.log(
+        `credit card validation test on "${zipCodeValue}" evaluates to ${zipCodeValid}`
+    );
+    if (zipCodeValid) {
+        validationPass(zipCode);
+        } else {
+        validationFail(zipCode);
+        }
+        return zipCodeValid;
+    }
+}
+
+function cvvValidator () {
+    if (!creditCard.hidden) {
+    const cvvValue = cvv.value;
+    const cvvNumberValid = /^\d{3}$/.test(cvvValue);
+    console.log(
+        `credit card validation test on "${cvvValue}" evaluates to ${cvvNumberValid}`
+      );
+      if (cvvNumberValid) {
+        validationPass(cvv);
+      } else {
+        validationFail(cvv);
+      }
+      return cvvNumberValid;
+    }
 }
 
 //Submit form listener
 formElement.addEventListener('submit', ()  => {
-    nameValidator();
-    emailValidator();
-    activityIsValid();
     e.preventDefault();
-})
+    if (!nameValidator()) {
+        e.preventDefault();
+    }
+    if (!emailValidator())
+        e.preventDefault();
+
+    if (!activitiyValidator) {
+    e.preventDefault();
+    } 
+
+    if (!creditCardValidator)
+    e.preventDefault();
+
+    if (!zipValidator) {
+    e.preventDefault();
+    }
+
+    if (!cvvValidator) {
+    e.preventDefault();
+    }
+console.log('submit handler is functional');
+});
 
 
 

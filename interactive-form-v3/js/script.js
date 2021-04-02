@@ -1,28 +1,20 @@
-//This constant variable gets the shirt color, the color select
+//Shirt color variable
 const colorSelect = document.querySelector("#color");
+//Color theme variable
 const colorTheme = colorSelect.children;
 
-//This variable gets the shirt design and disables the color
+//Shirt design variable and disableds it on page load
 const designSelect = document.querySelector("#design");
 colorSelect.disabled = true;
 
 //This const grabs the field and hides it when the page loads
-//This const grabs the select element
 const otherField = document.getElementById('other-job-role');
-const titleSelect = document.getElementById('title');
 otherField.hidden = true;
 
-//Form validation variables for the last section
-const emailAddress = document.querySelector('#email');
-const cardNumber = document.querySelector('cc-num');
-const zipCode = document.querySelector('zip');
-const cvv = document.querySelector('cvv');
-const formElement = document.forms[0];
-const nameField = document.getElementById("name");
-const nameFieldValue = nameField.value;
-nameField.focus();
+//This const grabs the title select element
+const titleSelect = document.getElementById('title');
 
-//This handler is going to be a click handler for the select element
+//Job title select handler
 titleSelect.addEventListener('change', (e) => {
  if (e.target.value === 'other'){
     otherField.style.display = 'block';
@@ -31,6 +23,7 @@ titleSelect.addEventListener('change', (e) => {
     }
 })
 
+//Design select event listener
 designSelect.addEventListener('change', (e) => {
     const jsPuns = document.querySelectorAll('[data-theme="js puns"]');
     const heartJS = document.querySelectorAll('[data-theme="heart js"]');
@@ -79,14 +72,11 @@ const payment =  document.querySelector('#payment');
 const creditCard = document.querySelector('#credit-card');
 const payPal = document.querySelector('#paypal');
 const bitcoin = document.querySelector('#bitcoin');
-// let paymentSelected = payment.children[2].selected;
-
 bitcoin.hidden = true;
 payPal.hidden = true;
 
-// payment.children[1].selected = true;
-// payment.setAttribute('selected', 'selected').children[1];
-//paymentSelected.setAttribute('selected', '');
+
+//Payment option listeners and conditionals
  payment.addEventListener('change', (e) => {
     bitcoin.hidden = false;
     payPal.hidden = false;
@@ -107,22 +97,79 @@ payPal.hidden = true;
     }
 });
 
-function nameValidator () {
+//Form validation variables 
+const emailAddress = document.querySelector('#email');
+const cardNumber = document.querySelector('cc-num');
+const zipCode = document.querySelector('zip');
+const cvv = document.querySelector('cvv');
+const formElement = document.querySelector('form');
+const nameField = document.getElementById("name");
+nameField.focus();
 
-    // return /^[a-zA-Z ]+$/.test(nameField);
-    // e.preventDefault();
+//Function validation for PASS
+function validationPass(element) {
+    element.parentElement.className.add("valid");
+    element.parentElement.className.remove("not-valid");
+    element.parentElement.lastElementChild.hidden = true;
+    console.log("You Pass!");
+  }
+  
+//function validation for FAIL
+  function validationFail(element) {
+    element.parentElement.className.add("not-valid");
+    element.parentElement.className.remove("valid");
+    element.parentElement.lastElementChild.hidden = false;
+    console.log("You Fail!");
+  }
+
+//Name validator
+const nameValidator = () => {
+    const nameFieldValue = nameField.value;
+    console.log("Name value is :", `"${nameFieldValue}"`);
+
+    const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameFieldValue);
+
+    console.log("Name validation test on" `${nameFieldValue}` `${nameIsValid}`);
+
+    if (nameIsValid) {
+        validationPass(nameFieldValue);
+    } else {
+        validationFail(nameFieldValue);
+    }
+    return nameIsValid;
 }
 
+//Email Validator
+const emailValidator = () => {
+    const emailValue = emailAddress.value;
 
-const emailValidator = (emailAddress) => {
- return /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailAddress);
+    console.log("email address value is :" `${emailValue}`);
+
+    const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
+
+    console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);
+
+    if (emailIsValid){
+        validationPass(emailValue);
+    } else {
+        validationFail(emailValue)
+    }
+    return emailIsValid;
 }
 
-formElement.addEventListener('submit', () => {
+//Activity validator
+const activitiyValidator = () => {
+    let activityIsValid = activityCost > 0;
+    console.log("activity section is valid" `${activityIsValid}`)
+    return activityIsValid;
+}
+
+//Submit form listener
+formElement.addEventListener('submit', ()  => {
     nameValidator();
-    // emailValidator();
+    emailValidator();
+    activityIsValid();
     e.preventDefault();
-
 })
 
 

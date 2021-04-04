@@ -70,6 +70,7 @@ registerForAct.addEventListener('change', (e) => {
 
 //Payment Options
 const payment =  document.querySelector('#payment');
+payment[1].selected = 'true';
 const creditCard = document.querySelector('#credit-card');
 const payPal = document.querySelector('#paypal');
 const bitcoin = document.querySelector('#bitcoin');
@@ -155,7 +156,7 @@ function cvvValidator () {
 
 //Submit form listener
 formElement.addEventListener('submit', (e)  => {
-e.preventDefault();
+// e.preventDefault();
 if (!nameValidator()) {
     e.preventDefault();
     nameField.parentElement.classList.add('not-valid');

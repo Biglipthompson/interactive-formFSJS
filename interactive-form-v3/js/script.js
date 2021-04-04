@@ -132,8 +132,8 @@ function activityValidator () {
 
 // Credit Card validator
 function creditCardValidator () {
-    const creditCardValue = creditCard.value;
-    const creditCardValid = /^\d{13,16}$/.test(creditCardValue);
+    const cardNumberValue = cardNumber.value;
+    const creditCardValid = /^\d{13,16}$/.test(cardNumberValue);
     console.log (`${creditCardValid}`)
     return creditCardValid;
 }
@@ -157,27 +157,27 @@ function cvvValidator () {
 formElement.addEventListener('submit', (e)  => {
 e.preventDefault();
 if (!nameValidator()) {
-        e.preventDefault();
-        nameField.parentElement.classList.add('not-valid');
-        nameField.parentElement.classList.remove('valid');
-        nameField.parentElement.lastElementChild.style.display = "inline";
-        //console.log("Please enter a valid name.");
+    e.preventDefault();
+    nameField.parentElement.classList.add('not-valid');
+    nameField.parentElement.classList.remove('valid');
+    nameField.parentElement.lastElementChild.style.display = "inline";
+    //console.log("Please enter a valid name.");
 } else {
-        nameField.parentElement.classList.add('valid');
-        nameField.parentElement.classList.remove('not-valid');
-        nameField.parentElement.lastElementChild.style.display = "none";
+    nameField.parentElement.classList.add('valid');
+    nameField.parentElement.classList.remove('not-valid');
+    nameField.parentElement.lastElementChild.style.display = "none";
 }
 
 if (!emailValidator()) {
-        e.preventDefault();
-        emailAddress.parentElement.classList.add('not-valid');
-        emailAddress.parentElement.classList.remove('valid');
-        emailAddress.parentElement.lastElementChild.style.display = "inline";
+    e.preventDefault();
+    emailAddress.parentElement.classList.add('not-valid');
+    emailAddress.parentElement.classList.remove('valid');
+    emailAddress.parentElement.lastElementChild.style.display = "inline";
         //console.log("Please enter a valid email address.");
 } else {
-        emailAddress.parentElement.classList.add('valid');
-        emailAddress.parentElement.classList.remove('not-valid');
-        emailAddress.parentElement.lastElementChild.style.display = "none";
+    emailAddress.parentElement.classList.add('valid');
+    emailAddress.parentElement.classList.remove('not-valid');
+    emailAddress.parentElement.lastElementChild.style.display = "none";
 }
 
 if (!activityValidator()) {
@@ -193,45 +193,49 @@ if (!activityValidator()) {
 }
 
 if (payment[1].selected){
-if (!creditCardValidator){
-        e.preventDefault();
-        creditCardValid.parentElement.classList.add('not-valid');
-        creditCardValid.parentElement.classList.remove('valid');
-        creditCardValid.parentElement.lastElementChild.style.display = "inline";
-        //console.log("Please enter a valid name.");
-} else {
-        creditCard.parentElement.classList.add('valid');
-        creditCard.parentElement.classList.remove('not-valid');
-        creditCard.parentElement.lastElementChild.style.display = "none";
-}}
+if (!creditCardValidator()){
+    e.preventDefault();
+    cardNumber.parentElement.classList.add('not-valid');
+    cardNumber.parentElement.classList.remove('valid');
+    cardNumber.parentElement.lastElementChild.style.display = "inline";
+    //console.log("Please enter a valid number.");
+} else if (creditCardValidator) {
+    cardNumber.parentElement.classList.add('valid');
+    cardNumber.parentElement.classList.remove('not-valid');
+    cardNumber.parentElement.lastElementChild.style.display = "none";
+}
+} else if (zipValidator()){
+    zipCode.parentElement.classList.add('valid');
+    zipCode.parentElement.classList.remove('not-valid');
+    zipCode.parentElement.lastElementChild.style.display = "none";
+}
 
 if (payment[1].selected){
-if (!zipValidator) {
+if (!zipValidator()) {
     e.preventDefault();
     zipCode.parentElement.classList.add('not-valid');
     zipCode.parentElement.classList.remove('valid');
     zipCode.parentElement.lastElementChild.style.display = "inline";
     //console.log("Please enter a valid name.");
-} else {
+} else if (zipValidator()){
     zipCode.parentElement.classList.add('valid');
     zipCode.parentElement.classList.remove('not-valid');
     zipCode.parentElement.lastElementChild.style.display = "none";
 }}
 
 if (payment[1].selected) {
-if (!cvvValidator) {
+if (!cvvValidator()) {
     e.preventDefault();
     cvv.parentElement.classList.add('not-valid');
     cvv.parentElement.classList.remove('valid');
     cvv.parentElement.lastElementChild.style.display = "inline";
     //console.log("Please enter a valid name.");
-} else {
+} else if (cvvValidator) {
     cvv.parentElement.classList.add('valid');
     cvv.parentElement.classList.remove('not-valid');
-    cvv.parentElement.lastElementChild.style.display = "none";
-}}
-console.log('submit handler is functional');
-});
+    cvv.parentElement.lastElementChild.style.display = "none";  
+    // console.log('submit handler is functional');
+}};
 
 
 
@@ -244,4 +248,4 @@ for (let i = 0; i < checkboxes.length ; i++) {
 checkboxes[i].addEventListener('blur', () => {
     checkboxes[i].parentElement.classList.remove('focus');
     });
-}
+}})

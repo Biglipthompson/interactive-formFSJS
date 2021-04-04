@@ -82,22 +82,23 @@ const zipCode = document.querySelector('#zip');
 const cvv = document.querySelector('#cvv');
 const formElement = document.querySelector('form');
 const nameField = document.getElementById("name");
+const activityDiv = document.querySelector('#activities-box')
 nameField.focus();
 
 //Payment option listeners and conditionals
  payment.addEventListener('change', (e) => {
     bitcoin.hidden = false;
     payPal.hidden = false;
-    if (e.target.value == 'credit-card'){
+if (e.target.value == 'credit-card'){
         creditCard.hidden = false;
         payPal.hidden = true;
         bitcoin.hidden = true;
-    }
-    else if (e.target.value == 'paypal') {
+}
+else if (e.target.value == 'paypal') {
         payPal.hidden = false;
         creditCard.hidden = true;
         bitcoin.hidden = true; 
-    }
+}
     else if ( e.target.value == 'bitcoin'){
         bitcoin.hidden = false;
         payPal.hidden = true;
@@ -105,33 +106,12 @@ nameField.focus();
     }
 });
 
-//Function validation for PASS
-// function validationPass (element) {
-//     element.parentElement.className.add("valid");
-//     element.parentElement.className.remove("not-valid");
-//     element.parentElement.lastElementChild.hidden = true;
-//     console.log("You Pass!");
-//   }
-  
-// //function validation for FAIL
-//   function validationFail(element) {
-//     element.parentElement.className.add("not-valid");
-//     element.parentElement.className.remove("valid");
-//     element.parentElement.lastElementChild.hidden = false;
-//     console.log("You Fail!");
-//   }
-
 //Name validator
 function nameValidator ()  {
     const nameFieldValue = nameField.value;
     console.log("Name value is :", `"${nameFieldValue}"`);
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameFieldValue);
     console.log("Name validation is :", `"${nameIsValid}"`);
-    // if (nameIsValid) {
-    //     validationPass(nameField);
-    // } else {
-    //     validationFail(nameField);
-    // }
     return nameIsValid;
 }
 
@@ -140,131 +120,120 @@ function emailValidator ()  {
     const emailValue = emailAddress.value;
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
     console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);
-
-    // if (emailIsValid){
-    //     validationPass(emailAddress);
-    // } else {
-    //     validationFail(emailAddress);
-    // }
     return emailIsValid;
 }
 
 //Activity validator
 function activityValidator () {
     let activityIsValid = totalCost > 0;
-    if (activityIsValid) {
-        registerForAct.classList.add("valid");
-        registerForAct.classList.remove("not-valid");
-        registerForAct.lastElementChild.hidden = true;
-      } else {
-        registerForAct.classList.add("not-valid");
-        registerForAct.classList.remove("valid");
-        registerForAct.lastElementChild.hidden = false;
-      }
-      console.log (`${activityIsValid}`)
+    console.log (`${activityIsValid}`)
     return activityIsValid;
 }
 
 // Credit Card validator
 function creditCardValidator () {
-    if (!creditCard.hidden) {
-     const creditCardValue = creditCard.value;
-     const creditCardValid = /^\d{13,16}$/.test(creditCardValue);
-     if (creditCardValid) {
-            validationPass (cardNumber)
-        } else {
-            validationFail(cardNumber);
-        }
-        console.log (`${creditCardValid}`)
-        return creditCardValid;
-    }
+    const creditCardValue = creditCard.value;
+    const creditCardValid = /^\d{13,16}$/.test(creditCardValue);
+    console.log (`${creditCardValid}`)
+    return creditCardValid;
 }
+
 // Zip code function
 function zipValidator () {
-    if (!creditCard.hidden) {
-        const zipCodeValue = zipCode.value;
-        const zipCodeValid = /^\d{5}$/.test(zipCodeValue);
-        console.log(
-        `credit card validation test on "${zipCodeValue}" evaluates to ${zipCodeValid}`
-    );
-    if (zipCodeValid) {
-        validationPass(zipCode);
-        } else {
-        validationFail(zipCode);
-        }
-        return zipCodeValid;
-    }
+    const zipCodeValue = zipCode.value;
+    const zipCodeValid = /^\d{5}$/.test(zipCodeValue);
+    console.log("Name validation is :", `"${zipCodeValid}"`);
+    return zipCodeValid;
 }
 
 function cvvValidator () {
-    if (!creditCard.hidden) {
     const cvvValue = cvv.value;
     const cvvNumberValid = /^\d{3}$/.test(cvvValue);
-    console.log(
-        `credit card validation test on "${cvvValue}" evaluates to ${cvvNumberValid}`
-      );
-      if (cvvNumberValid) {
-        validationPass(cvv);
-      } else {
-        validationFail(cvv);
-      }
-      return cvvNumberValid;
-    }
+    console.log(`credit card validation test on "${cvvValue}" evaluates to ${cvvNumberValid}`)
+    return cvvNumberValid;
 }
 
 //Submit form listener
 formElement.addEventListener('submit', (e)  => {
-    e.preventDefault();
-    if (!nameValidator()) {
+e.preventDefault();
+if (!nameValidator()) {
         e.preventDefault();
         nameField.parentElement.classList.add('not-valid');
         nameField.parentElement.classList.remove('valid');
         nameField.parentElement.lastElementChild.style.display = "inline";
         //console.log("Please enter a valid name.");
-    } else {
+} else {
         nameField.parentElement.classList.add('valid');
         nameField.parentElement.classList.remove('not-valid');
         nameField.parentElement.lastElementChild.style.display = "none";
-        }
+}
 
-    if (!emailValidator()) {
+if (!emailValidator()) {
         e.preventDefault();
         emailAddress.parentElement.classList.add('not-valid');
         emailAddress.parentElement.classList.remove('valid');
         emailAddress.parentElement.lastElementChild.style.display = "inline";
         //console.log("Please enter a valid email address.");
-    } else {
+} else {
         emailAddress.parentElement.classList.add('valid');
         emailAddress.parentElement.classList.remove('not-valid');
         emailAddress.parentElement.lastElementChild.style.display = "none";
-        }
+}
 
-    if (!activityValidator()) {
+if (!activityValidator()) {
     e.preventDefault();
-    registerForAct.parentElement.classList.add('not-valid');
-    registerForAct.parentElement.classList.remove('valid');
-    registerForAct.parentElement.lastElementChild.style.display = "inline";
+    activityDiv.parentElement.classList.add('not-valid');
+    activityDiv.parentElement.classList.remove('valid');
+    activityDiv.parentElement.lastElementChild.style.display = "inline";
     //console.log("Please enter a valid email address.");
 } else {
-    registerForAct.parentElement.classList.add('valid');
-    registerForAct.parentElement.classList.remove('not-valid');
-    registerForAct.parentElement.lastElementChild.style.display = "none";
-    }
- 
+    activityDiv.parentElement.classList.add('valid');
+    activityDiv.parentElement.classList.remove('not-valid');
+    activityDiv.parentElement.lastElementChild.style.display = "none";
+}
 
-    if (!creditCardValidator){
-    
-    e.preventDefault();
-    }
-    if (!zipValidator) {
-    e.preventDefault();
-    }
+if (payment[1].selected){
+if (!creditCardValidator){
+        e.preventDefault();
+        creditCardValid.parentElement.classList.add('not-valid');
+        creditCardValid.parentElement.classList.remove('valid');
+        creditCardValid.parentElement.lastElementChild.style.display = "inline";
+        //console.log("Please enter a valid name.");
+} else {
+        creditCard.parentElement.classList.add('valid');
+        creditCard.parentElement.classList.remove('not-valid');
+        creditCard.parentElement.lastElementChild.style.display = "none";
+}}
 
-    if (!cvvValidator) {
+if (payment[1].selected){
+if (!zipValidator) {
     e.preventDefault();
-    }
+    zipCode.parentElement.classList.add('not-valid');
+    zipCode.parentElement.classList.remove('valid');
+    zipCode.parentElement.lastElementChild.style.display = "inline";
+    //console.log("Please enter a valid name.");
+} else {
+    zipCode.parentElement.classList.add('valid');
+    zipCode.parentElement.classList.remove('not-valid');
+    zipCode.parentElement.lastElementChild.style.display = "none";
+}}
+
+if (payment[1].selected) {
+if (!cvvValidator) {
+    e.preventDefault();
+    cvv.parentElement.classList.add('not-valid');
+    cvv.parentElement.classList.remove('valid');
+    cvv.parentElement.lastElementChild.style.display = "inline";
+    //console.log("Please enter a valid name.");
+} else {
+    cvv.parentElement.classList.add('valid');
+    cvv.parentElement.classList.remove('not-valid');
+    cvv.parentElement.lastElementChild.style.display = "none";
+}}
 console.log('submit handler is functional');
 });
+
+
 
 // accessibility section 
 const checkboxes = document.querySelectorAll("input[type = checkbox]");

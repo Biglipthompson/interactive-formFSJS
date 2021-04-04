@@ -58,7 +58,7 @@ const itemCost = document.querySelector('#activities-cost');
 let totalCost = 0;
 //Event listener that checks and adds prices to the total price.
 registerForAct.addEventListener('change', (e) => {
-    const activityCost =  parseInt(e.target.getAttribute('data-cost'));
+    let activityCost =  parseInt(e.target.getAttribute('data-cost'));
     if (e.target.checked){
         totalCost += activityCost;
     }
@@ -106,32 +106,32 @@ nameField.focus();
 });
 
 //Function validation for PASS
-function validationPass(element) {
-    element.parentElement.className.add("valid");
-    element.parentElement.className.remove("not-valid");
-    element.parentElement.lastElementChild.hidden = true;
-    console.log("You Pass!");
-  }
+// function validationPass (element) {
+//     element.parentElement.className.add("valid");
+//     element.parentElement.className.remove("not-valid");
+//     element.parentElement.lastElementChild.hidden = true;
+//     console.log("You Pass!");
+//   }
   
-//function validation for FAIL
-  function validationFail(element) {
-    element.parentElement.className.add("not-valid");
-    element.parentElement.className.remove("valid");
-    element.parentElement.lastElementChild.hidden = false;
-    console.log("You Fail!");
-  }
+// //function validation for FAIL
+//   function validationFail(element) {
+//     element.parentElement.className.add("not-valid");
+//     element.parentElement.className.remove("valid");
+//     element.parentElement.lastElementChild.hidden = false;
+//     console.log("You Fail!");
+//   }
 
 //Name validator
 function nameValidator ()  {
     const nameFieldValue = nameField.value;
     console.log("Name value is :", `"${nameFieldValue}"`);
     const nameIsValid = /^[a-zA-Z]+ ?[a-zA-Z]*? ?[a-zA-Z]*?$/.test(nameFieldValue);
-    console.log("Name validation test on" `${nameFieldValue}` `${nameIsValid}`);
-    if (nameIsValid) {
-        validationPass(nameField);
-    } else {
-        validationFail(nameField);
-    }
+    console.log("Name validation is :", `"${nameIsValid}"`);
+    // if (nameIsValid) {
+    //     validationPass(nameField);
+    // } else {
+    //     validationFail(nameField);
+    // }
     return nameIsValid;
 }
 
@@ -141,17 +141,17 @@ function emailValidator ()  {
     const emailIsValid = /^[^@]+@[^@.]+\.[a-z]+$/i.test(emailValue);
     console.log(`Email validation test on "${emailValue}" evaluates to ${emailIsValid}`);
 
-    if (emailIsValid){
-        validationPass(emailAddress);
-    } else {
-        validationFail(emailAddress);
-    }
+    // if (emailIsValid){
+    //     validationPass(emailAddress);
+    // } else {
+    //     validationFail(emailAddress);
+    // }
     return emailIsValid;
 }
 
 //Activity validator
-function activitiyValidator () {
-    let activityIsValid = activityCost > 0;
+function activityValidator () {
+    let activityIsValid = totalCost > 0;
     if (activityIsValid) {
         registerForAct.classList.add("valid");
         registerForAct.classList.remove("not-valid");
@@ -161,6 +161,7 @@ function activitiyValidator () {
         registerForAct.classList.remove("valid");
         registerForAct.lastElementChild.hidden = false;
       }
+      console.log (`${activityIsValid}`)
     return activityIsValid;
 }
 
@@ -174,7 +175,8 @@ function creditCardValidator () {
         } else {
             validationFail(cardNumber);
         }
-        return cardNumber;
+        console.log (`${creditCardValid}`)
+        return creditCardValid;
     }
 }
 // Zip code function
@@ -211,20 +213,49 @@ function cvvValidator () {
 }
 
 //Submit form listener
-formElement.addEventListener('submit', ()  => {
+formElement.addEventListener('submit', (e)  => {
+    e.preventDefault();
     if (!nameValidator()) {
         e.preventDefault();
-    }
-    if (!emailValidator())
+        nameField.parentElement.classList.add('not-valid');
+        nameField.parentElement.classList.remove('valid');
+        nameField.parentElement.lastElementChild.style.display = "inline";
+        //console.log("Please enter a valid name.");
+    } else {
+        nameField.parentElement.classList.add('valid');
+        nameField.parentElement.classList.remove('not-valid');
+        nameField.parentElement.lastElementChild.style.display = "none";
+        }
+
+    if (!emailValidator()) {
         e.preventDefault();
+        emailAddress.parentElement.classList.add('not-valid');
+        emailAddress.parentElement.classList.remove('valid');
+        emailAddress.parentElement.lastElementChild.style.display = "inline";
+        //console.log("Please enter a valid email address.");
+    } else {
+        emailAddress.parentElement.classList.add('valid');
+        emailAddress.parentElement.classList.remove('not-valid');
+        emailAddress.parentElement.lastElementChild.style.display = "none";
+        }
 
-    if (!activitiyValidator) {
+    if (!activityValidator()) {
     e.preventDefault();
-    } 
+    registerForAct.parentElement.classList.add('not-valid');
+    registerForAct.parentElement.classList.remove('valid');
+    registerForAct.parentElement.lastElementChild.style.display = "inline";
+    //console.log("Please enter a valid email address.");
+} else {
+    registerForAct.parentElement.classList.add('valid');
+    registerForAct.parentElement.classList.remove('not-valid');
+    registerForAct.parentElement.lastElementChild.style.display = "none";
+    }
+ 
 
-    if (!creditCardValidator)
+    if (!creditCardValidator){
+    
     e.preventDefault();
-
+    }
     if (!zipValidator) {
     e.preventDefault();
     }
@@ -237,9 +268,9 @@ console.log('submit handler is functional');
 
 // accessibility section 
 const checkboxes = document.querySelectorAll("input[type = checkbox]");
-for (let i = 0; i < checkboxes.length ; i+= 1) {
+for (let i = 0; i < checkboxes.length ; i++) {
     checkboxes[i].addEventListener('focus', () => {
-        checkboxes[i].parentElement.classList.add('focus');
+    checkboxes[i].parentElement.classList.add('focus');
     });
 checkboxes[i].addEventListener('blur', () => {
     checkboxes[i].parentElement.classList.remove('focus');

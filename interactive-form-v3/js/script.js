@@ -157,7 +157,7 @@ function cvvValidator () {
 
 //Submit form listener
 formElement.addEventListener('submit', (e)  => {
-e.preventDefault()
+// e.preventDefault();
 if (!nameValidator()) {
     e.preventDefault();
     nameField.parentElement.classList.add('not-valid');
@@ -241,15 +241,12 @@ if (!cvvValidator()) {
 
 
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-checkboxes.forEach(e => {
-    e.addEventListener('focus', e => {
-        e.target.parentElement.classList.add('focus')
-    })
-    e.addEventListener('blur', e => {
-        const active = document.querySelector('.focus')
-        if (active) {
-            active.classList.remove('focus')
-        }
-    })
-
-});
+// accessibility section 
+for (let i = 0; i < checkboxes.length; i++) {
+checkboxes.addEventListener('focus', () => { 
+    checkboxes[i].parentElement.classList.add('.focus');
+    });
+checkbox.addEventListener('blur', () => { 
+    checkboxes[i].parentElement.classList.remove('.focus');
+    });
+}

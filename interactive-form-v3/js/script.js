@@ -251,7 +251,7 @@ if (!cvvValidator()) {
 //     });
 // }
 
-const checkboxes = document.querySelectorAll('input[type ="checkbox"]');
+const checkboxes = document.querySelectorAll('input[type = "checkbox"]');
 for (let i = 0; i < checkboxes.length; i++) {
     checkboxes[i].addEventListener('focus', () => {
     checkboxes[i].parentElement.classList.add('focus');

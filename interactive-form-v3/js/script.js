@@ -243,10 +243,12 @@ if (!cvvValidator()) {
 const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 // accessibility section 
 for (let i = 0; i < checkboxes.length; i++) {
-checkboxes.addEventListener('focus', () => { 
-    checkboxes[i].parentElement.classList.add('.focus');
+    checkboxes[i].addEventListener('focus', () => { 
+        checkboxes[i].parentElement.classList.add('focus');
     });
-checkbox.addEventListener('blur', () => { 
-    checkboxes[i].parentElement.classList.remove('.focus');
+    checkboxes[i].addEventListener('blur', () => { 
+        checkboxes[i].parentElement.classList.remove('focus');
     });
 }
+
+

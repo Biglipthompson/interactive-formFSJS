@@ -3,6 +3,7 @@ const colorSelect = document.querySelector("#color");
 //Color theme variable
 const colorTheme = colorSelect.children;
 
+
 //Shirt design variable and disableds it on page load
 const designSelect = document.querySelector("#design");
 colorSelect.disabled = true;
@@ -156,7 +157,7 @@ function cvvValidator () {
 
 //Submit form listener
 formElement.addEventListener('submit', (e)  => {
-// e.preventDefault();
+e.preventDefault()
 if (!nameValidator()) {
     e.preventDefault();
     nameField.parentElement.classList.add('not-valid');
@@ -236,17 +237,19 @@ if (!cvvValidator()) {
     cvv.parentElement.classList.remove('not-valid');
     cvv.parentElement.lastElementChild.style.display = "none";  
     // console.log('submit handler is functional');
-}};
+}}});
 
 
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+checkboxes.forEach(e => {
+    e.addEventListener('focus', e => {
+        e.target.parentElement.classList.add('focus')
+    })
+    e.addEventListener('blur', e => {
+        const active = document.querySelector('.focus')
+        if (active) {
+            active.classList.remove('focus')
+        }
+    })
 
-// accessibility section 
-const checkboxes = document.querySelectorAll("input[type = checkbox]");
-for (let i = 0; i < checkboxes.length ; i++) {
-    checkboxes[i].addEventListener('focus', () => {
-    checkboxes[i].parentElement.classList.add('focus');
-    });
-checkboxes[i].addEventListener('blur', () => {
-    checkboxes[i].parentElement.classList.remove('focus');
-    });
-}})
+});
